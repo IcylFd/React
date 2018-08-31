@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lists & Keys</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+
+    <style>
+        .sidebar{
+            height:500px;
+            width:150px;
+            border-right:1px solid #333;
+            display: block;
+            float:left;
+        }
+        .content{
+            width:1000px;
+            float:left;
+            margin-left:40px;
+        }
+        .container{
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        /*const numbers = [1, 2, 3, 4, 5];
+        //const doubled = numbers.map((number) => number * 2);
+        //console.log(doubled);
+
+        const listItems = numbers.map((number) => <li>{number}</li>);
+
+        ReactDOM.render(
+            <ul>{listItems}</ul>,
+            document.getElementById('root')
+        )*/
+
+
+
+        /*function ListItems(props){
+            return <li>{props.value}</li>
+        }
+
+        function NumberList(props) {
+            const numbers = props.numbers;
+            const listItems = numbers.map((number) =>
+                <ListItems key={number.toString()} value={number}/>
+            )
+
+            return (
+                <ul>{listItems}</ul>
+            )
+        }
+
+        ReactDOM.render(
+            <NumberList numbers={[1,2,3,4,5]}/>,
+            document.getElementById('root')
+        )*/
+
+
+
+
+        function Blog(props) {
+            const sidebar = (
+
+                    <ul className="sidebar">
+                        {props.posts.map(
+                            (post) => <li key={post.id}  onClick={clickItem}>
+                                {post.title}
+                            </li>
+                        )}
+                    </ul>
+
+            );
+            const content = props.posts.map((post) =>
+               <div key={post.id} className="content">
+                    <h3>{post.title}</h3>
+                    <p>{post.content}</p>
+               </div>
+            );
+
+            return (
+                <div className="container">
+                    {sidebar}
+                    {content}
+                </div>
+            )
+            function clickItem() {
+                console.log(props.posts.map(
+                    (post) => {post.id}
+                ))
+            }
+        }
+
+        const posts = [
+            {
+                id: "1",
+                title:"Hello",
+                content:"Welcome to learning React!"
+            },
+            {
+                id: "2",
+                title:"Installation",
+                content:"aaa aasdfsfa a sfs"
+            },
+            {
+                id: "3",
+                title:"WEQREWRW",
+                content: "sdfasfsdf fff erw"
+            }
+        ];
+
+        ReactDOM.render(
+            <Blog posts={posts}/>,
+            document.getElementById('root')
+        )
+    </script>
+</body>
+</html>

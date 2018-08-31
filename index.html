@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>菜鸟教程 React 实例</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <style>
+        div{
+            color:#ccc;
+        }
+    </style>
+</head>
+<body>
+<div id="example"></div>
+<div id="root"></div>
+<div id="root1"></div>
+
+<script type="text/babel">
+     /*var TestClickComponent = React.createClass({
+        clickTarget : function (event) {
+            var tipE = ReactDOM.findDOMNode(this.refs.tip);//this.refs.tip 是React Component
+                                                        //用React.findDOMNode()方法获取真实的DOM节点
+            if(tipE.style.display == "none"){
+                tipE.style.display = "inline"
+            }
+            else{
+                tipE.style.display = "none";
+            }
+            event.stopPropagation(); //停止冒泡
+            event.preventDefault(); //阻止浏览器默认行为
+        },
+        render: function () {
+            return (<div>
+                <button onClick={this.clickTarget}>显示|隐藏</button>
+                <span ref="tip">点击测试</span>
+            </div>)
+        }
+    });
+    var TestInputComponent = React.createClass({
+        changeTarget : function (event) {
+            this.setState({
+                inputContent:event.target.value
+            });
+            event.preventDefault();
+            event.stopPropagation();
+        },
+        getInitialState : function () {       //初始化的state 用来存储用户输入的内容
+            return  {
+                inputContent: ''
+            }
+        },
+        render : function () {
+            return (
+                    <div><input type="text" onChange={this.changeTarget}/>{this.state.inputContent}</div>
+            )
+        }
+    });
+    function Welcome (props) {
+        console.log(props);
+        return <h1>Hello,{props.name}</h1>
+    }
+    function App () {
+        return (
+            <div>
+                <Welcome name="a" />
+                <Welcome name="b" />
+                <Welcome name="c" />
+            </div>
+        )
+    }
+    ReactDOM.render(
+            <div><TestClickComponent /><TestInputComponent /></div>,
+        document.getElementById('example')
+    );
+    ReactDOM.render(
+        <App />,document.getElementById('root1')
+    )*/
+
+
+
+
+    class Clock extends React.Component {    //类组件
+        constructor(props){
+            super(props);
+            this.state = {
+                date:new Date()
+            }
+        };
+
+        //生命周期钩子
+        componentDidMount(){    //组件输出在被渲染到DOM之后运行
+            console.log(this);
+            this.timerID = setInterval(   //state可以自己添加字段
+                () => {this.tick()},
+                1000
+            )
+        }
+
+        componentWillUnmount(){
+            clearInterval(this.timerID);
+        }
+
+        tick() {
+            this.setState({
+                date: new Date()
+            });
+        }
+        render(){
+            return (
+                <div>
+                    <h2>{this.state.date.toLocaleTimeString()}</h2>
+                </div>
+            )
+        }
+
+    }
+
+    ReactDOM.render(
+            <Clock />,
+            document.getElementById("root")
+    );
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>toggle</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<div id="root"></div>
+<div id="root1"></div>
+
+<script type="text/babel">
+    class Toggle extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = {
+                isToggleOn : true
+            };
+            //this.handleClick = this.handleClick.bind(this);
+
+        }
+
+        handleClick  () {
+            this.setState (prevState => ({
+                isToggleOn : !prevState.isToggleOn,
+                name : "aaa"
+            }));
+            console.log('this is ',this)
+        };
+
+        render() {
+            return (
+                <div>
+                    <div className="name">
+                        {this.state.isToggleOn ? this.state.name : ''}
+                    </div>
+                    <button onClick={(e) => this.handleClick(e)}>
+                        {this.state.isToggleOn ? 'ON' : 'OFF'}
+                    </button>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(
+        <Toggle />,document.getElementById('root')
+    )
+</script>
+</body>
+</html>
