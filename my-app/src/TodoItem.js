@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{component} from 'react';
+import PropTypes from 'prop-types';
 
 class TodoItem extends React.Component {
 
@@ -12,13 +13,26 @@ class TodoItem extends React.Component {
 		this.props.delete(this.props.index);
 	}
 	render(){
-		const { content } = this.props;
+		const { content, test } = this.props;
 		return (
 			<div onClick={this.handleDelete}>
-				{content}
+				{test} - {content}
 			</div>
 		)
 	}
+	handleClick(){
+		const { deleteItem, index} = this.props;
+		deleteItem(index);
+	}
+}
+TodoItem.propTypes = {                   //参数类型校验
+	test:PropTypes.string.isRequired,    //isRequired 要求必须传递该参数
+	content: PropTypes.arrayOf(PropTypes.number, PropTypes.string),
+	deleteItem: PropTypes.func,
+	index: PropTypes.number
 }
 
+TodoItem.defaultProps = {      //参数默认值
+	test: 'hello world'
+}
 export default TodoItem;
