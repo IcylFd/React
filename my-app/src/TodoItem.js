@@ -14,11 +14,13 @@ class TodoItem extends React.Component {
 	}
 	render(){
 		const { content, test } = this.props;
-		return (
-			<div onClick={this.handleDelete}>
-				{test} - {content}
-			</div>
-		)
+		// return (
+		// 	<div onClick={this.handleDelete}>
+		// 		{test} - {content}
+		// 	</div>
+		// )
+		// return <div>item</div>
+		return React.createElement('div',{},'item');   //创建节点：标签,属性,内容
 	}
 	handleClick(){
 		const { deleteItem, index} = this.props;
