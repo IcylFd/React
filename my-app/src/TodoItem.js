@@ -13,15 +13,27 @@ class TodoItem extends React.Component {
 		this.props.delete(this.props.index);
 	}
 	render(){
+		console.log('child render');
 		const { content, test } = this.props;
-		// return (
-		// 	<div onClick={this.handleDelete}>
-		// 		{test} - {content}
-		// 	</div>
-		// )
+		return (
+			<div onClick={this.handleDelete}>
+				{test} - {content}
+			</div>
+		)
 		// return <div>item</div>
-		return React.createElement('div',{},'item');   //创建节点：标签,属性,内容
+		// return React.createElement('div',{},'item');   //创建节点：标签,属性,内容
 	}
+
+
+	componentWillReceiveProps(){
+		console.log('child componentWillReceiveProps');
+	}
+
+
+    //当这个组件即将被页面中剔除时才会被执行
+    componentWillUnmount(){
+        console.log('componentWillUnmount');
+    }
 	handleClick(){
 		const { deleteItem, index} = this.props;
 		deleteItem(index);
@@ -29,7 +41,7 @@ class TodoItem extends React.Component {
 }
 TodoItem.propTypes = {                   //参数类型校验
 	test:PropTypes.string.isRequired,    //isRequired 要求必须传递该参数
-	content: PropTypes.arrayOf(PropTypes.number, PropTypes.string),
+	content: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	deleteItem: PropTypes.func,
 	index: PropTypes.number
 }
