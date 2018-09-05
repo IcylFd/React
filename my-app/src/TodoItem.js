@@ -1,4 +1,4 @@
-import React,{component} from 'react';
+import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 
 class TodoItem extends React.Component {
@@ -24,6 +24,14 @@ class TodoItem extends React.Component {
 		// return React.createElement('div',{},'item');   //创建节点：标签,属性,内容
 	}
 
+	shouldComponentUpdate(nextProps, nextState){
+		if(nextProps.content !== this.props.content){
+			return true;
+		}
+		else{
+            return false;
+		}
+	}
 
 	componentWillReceiveProps(){
 		console.log('child componentWillReceiveProps');

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import TodoItem from './TodoItem';
+import axios from 'axios';
 
 class TodoList extends Component {   //React.Component
   constructor(props){
@@ -24,9 +25,10 @@ class TodoList extends Component {   //React.Component
 
   handleInputChange(e){
       console.log(e.target);
-      const value = this.input.value;
+      // const value = this.input.value;
     this.setState({
-      inputValue: value
+      // inputValue: value
+        inputValue: e.target.value
     });
   }
 
@@ -47,9 +49,9 @@ class TodoList extends Component {   //React.Component
       this.state.list.map((item,index) => {
               return <TodoItem
                       delete={this.handleDelete}
-                      key={item}
+                      key={index}
                       content={item}
-                      ind ex={index}
+                      index={index}
                     />
             })
     )
@@ -77,8 +79,19 @@ class TodoList extends Component {   //React.Component
   }
 
     //在组件被挂载到页面之后自动执行
+    //在这里发送AJAX请求
     componentDidMount(){
         console.log('componentDidMount');
+        axios.get('/api/todolist')
+            .then((res)=>{
+                console.log(res.data);
+                this.setState(()=>({
+                    list:[...res.data]
+                })
+
+                )
+            })
+            .catch(()=>alert('error'));
     }
 
     //在组件更新之前自动执行
@@ -90,7 +103,7 @@ class TodoList extends Component {   //React.Component
     //组件被更新之前自动执行（在shouldComponentUpdate之后执行）
     //如果shouldComponentUpdate返回true它才执行
     componentWillUpdate(){
-        console.log('componentWillUpdate')
+        console.log('componentWillUpdate');
     }
 
     componentWillReceiveProps(){
